@@ -78,7 +78,8 @@
                 <div class="wrap-box">
                     <ul class="img-list">
                         <li v-for="(itemson, index) in item.datas" :key="itemson.artID">
-                            <a href="#/site/goodsinfo/87" class="">
+                            
+                            <router-link :to="'/goodsinfo/'+itemson.artID">
                                 <div class="img-box">
                                     <img :src="itemson.img_url">
                                 </div>
@@ -93,7 +94,7 @@
                                         </span>
                                     </p>
                                 </div>
-                            </a>
+                            </router-link>
                         </li>
                     
                     </ul>
@@ -106,12 +107,14 @@
 <script>
 // 导入模块
 import axios from 'axios';
-// 引入模块 moment
-import moment from 'moment';
+
 // 接口调用
 // http://47.106.148.205:8899/site/goods/gettopdata/goods
+
+ const baseUrl ='http://47.106.148.205:8899';
+
 export default {
-    // 数据
+        // 数据
     data:function(){
         return {
             catelist:[],
@@ -121,20 +124,12 @@ export default {
         }
     },
     // 过滤器
-    filters:{
-        // 默认的切割方式 不够通用 
-        // 使用moment.js替换
-        cutTime(value){
-            // return value.slice(0,10);
-            // 使用moment.js进行替换
-            return moment(value).format('YYYY年MM月DD日')
-        }
-    },
+  
     // 即将显示时调用
     beforeMount() {
         // console.log('即将要显示了哦');
-        axios
-        .get("http://47.106.148.205:8899/site/goods/gettopdata/goods")
+        this.axios
+        .get(`site/goods/gettopdata/goods`)
         .then((response)=>{
             //  console.log(response)
             // 保存数据
@@ -145,7 +140,7 @@ export default {
         .catch((error)=>{
             // console.log(error);
         })
-         axios.get("http://47.106.148.205:8899/site/goods/getgoodsgroup")
+        this.axios.get(`site/goods/getgoodsgroup`)
         .then((response)=>{
             // console.log(response);
             this.goodList = response.data.message;
@@ -162,6 +157,8 @@ export default {
     },
 };
 </script>
+
+
 <style scoped>
 
     .el-carousel__item img{
