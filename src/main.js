@@ -10,6 +10,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // 引入模块 moment
 import moment from 'moment';
+
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 // 懒加载
 // import VueLazyload from 'vue-lazyload'
 //  import path from 'path'
@@ -22,6 +25,7 @@ axios.defaults.baseURL="http://47.106.148.205:8899";
 
 
 
+Vue.use(iView);
 Vue.use(ElementUI);
 // 使用路由中间件
 Vue.use(VueRouter);
